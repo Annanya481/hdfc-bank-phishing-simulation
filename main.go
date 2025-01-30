@@ -33,18 +33,15 @@ func serveLandingPage(w http.ResponseWriter, r *http.Request) {
 func captureCredentials(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		username := r.FormValue("username")
-		// password := r.FormValue("password")
+		password := r.FormValue("password")
 
-		// fmt.Println("Captured Credentials:")
-		// fmt.Printf("Username: %s\nPassword: %s\n", username, password)
-
-		// Respond to user
 		fmt.Fprintf(w, `
 			<h1>Phishing Awareness Simulation</h1>
 			<p>Thank you for participating in this simulation. Below are the credentials you entered:</p>
 			<p><strong>Username:</strong> %s</p>
+			<p><strong>Password:</strong> %s</p>
 			<p><em>This was a controlled exercise. None of your credentials have been captured!</em></p>
-		`, username)
+		`, username, password)
 	} else {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
